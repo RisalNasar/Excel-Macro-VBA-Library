@@ -8,3 +8,26 @@
 '  If Compare is omitted, the Option Compare setting determines the type of comparison.
 'https://msdn.microsoft.com/en-us/library/8460tsh1(v=vs.90).aspx
 
+Function Custom_GetLastRow(targetSheet As Worksheet) As Long
+
+    Custom_GetLastRow = targetSheet.UsedRange.Rows.count
+    
+    'Custom_GetLastRow = targetSheet.Columns(columnReference).End(xlDown).Row
+    
+    ''Ctrl + Shift + End
+    'lastRow = sht.Cells(sht.Rows.count, "A").End(xlUp).Row
+    '
+    ''Using UsedRange
+    'sht.UsedRange 'Refresh UsedRange
+    'lastRow = sht.UsedRange.Rows(sht.UsedRange.Rows.count).Row
+    '
+    ''Using Table Range
+    'lastRow = sht.ListObjects("Table1").Range.Rows.count
+    '
+    ''Using Named Range
+    'lastRow = sht.Range("MyNamedRange").Rows.count
+    '
+    ''Ctrl + Shift + Down (Range should be first cell in data set)
+    'lastRow = sht.Range("A1").CurrentRegion.Rows.count
+
+End Function
