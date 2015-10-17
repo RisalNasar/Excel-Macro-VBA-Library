@@ -1,3 +1,9 @@
+' Custom Module Definitions are provided below for easy Reference.
+
+
+
+' ---------------------------------------------------------------------------------------------------------------
+
 'Adjust row height for the entire sheet.
 Sub Custom_SetRowHeightSheet(targetSheet As Worksheet, rowHeightSheet As Integer)
 
