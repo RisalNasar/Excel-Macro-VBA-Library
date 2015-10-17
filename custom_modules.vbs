@@ -266,7 +266,7 @@ Sub Custom_CreatePivotTable(formatReferenceSheet As Worksheet)
     Wend
     
 'Default value of ManualUpdate property is False wherein a PivotTable report is recalculated
-'   automatically on each change. Turn off automatic updation of Pivot Table during the process of its creation to speed up code.
+'   automatically on each change. Turn off automatic update of Pivot Table during the process of its creation to speed up code.
 
     pivotTableTargetSheet.PivotTables(pivotTableName).ManualUpdate = False
 
@@ -275,7 +275,7 @@ End Sub
 
 Sub Custom_PivotTableAddField(pivotTableTargetSheet As Worksheet, pivotTableName As String, fieldName As String, _
     fieldType As Integer)
-' Create a PageField (Report Filter) in the pivot table 'pivotTableName' in sheet 'pivotTableTargetSheet'.
+' Create a Page Field (Report Filter) in the pivot table 'pivotTableName' in sheet 'pivotTableTargetSheet'.
 
     Dim pivotTableHolder As PivotTable
     Dim pivotFieldHolder As PivotField
@@ -349,10 +349,14 @@ Sub Custom_SetColumnNumberFormat(targetSheet As Worksheet, columnReference As In
 
     targetSheet.Columns(columnReference).NumberFormat = numberFormatString
 
+	'References for numberFormatString:
+	'https://msdn.microsoft.com/en-us/library/office/ff196401.aspx
+	'https://support.office.com/en-us/article/Number-format-codes-5026bbd6-04bc-48cd-bf33-80f18b4eae68?ui=en-US&rs=en-US&ad=US
+	
 End Sub
 
 Sub Custom_SortSheetByColumn(targetSheet As Worksheet, key1ColumnReference As Integer, order1String As String)
-' Sort the entire sheet 'targetSheet' by the 'key1ColumnReference' in the order indicated by 'order1Reference
+' Sort the entire sheet 'targetSheet' by the 'key1ColumnReference' in the order indicated by 'order1Reference'
 
     Dim orderChoice As Integer
 
@@ -368,13 +372,14 @@ Sub Custom_SortSheetByColumn(targetSheet As Worksheet, key1ColumnReference As In
 End Sub
 
 Sub Custom_RemoveDuplicates(targetSheet As Worksheet, indexColumnReference As Integer)
-' Remove all rows where the Column refered by 'indexColumnReference' has duplicate values.
+' Remove all rows where the Column referred by 'indexColumnReference' has duplicate values.
 
     targetSheet.Range("A1").CurrentRegion.RemoveDuplicates Columns:=indexColumnReference, Header:=xlYes
 
 End Sub
 
 Sub Custom_FreezeView(targetSheet As Worksheet, columnSplitLength As Long, rowSplitLength As Long)
+' Freeze the view of the targetSheet.  The Split will be made at columnSplitLength and rowSplitLength.
 
     targetSheet.Activate
 
@@ -418,6 +423,7 @@ Sub Custom_HideSheet(targetSheet As Worksheet)
 End Sub
 
 Sub Custom_ColumnFilter(targetSheet As Worksheet, columnReference As Integer, criteriaString As String)
+' Enable filter on a column of the targetSheet.  Filter for string value criteriaString.
 
     targetSheet.Columns(columnReference).AutoFilter field:=1, Criteria1:=criteriaString, VisibleDropDown:=False
     
@@ -425,20 +431,23 @@ Sub Custom_ColumnFilter(targetSheet As Worksheet, columnReference As Integer, cr
 End Sub
 
 Sub Custom_ReleaseFilter(targetSheet As Worksheet)
+' Remove all filters from the targetSheet.
     
     targetSheet.AutoFilterMode = False
     
 End Sub
 
 Sub Custom_DeleteVisibleRows(targetSheet As Worksheet)
-    
+' Delete all Visible Rows in the targetSheet.  This should be used after filtering the current sheet for the information
+'	you would want to have deleted.    
+	
     targetSheet.UsedRange.Offset(1, 0).SpecialCells(xlCellTypeVisible).EntireRow.Delete
 
 End Sub
 
 Sub Custom_SetColumnWidthSheet(targetSheet As Worksheet, columnWidthSheet As Integer)
-
  '  Adjust column width for the entire sheet.
+ 
     targetSheet.Cells.ColumnWidth = columnWidthSheet
     
 End Sub
