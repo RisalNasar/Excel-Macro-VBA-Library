@@ -93,6 +93,7 @@ End Sub
 ' Sub Routine to re-arrange columns from one sheet to another.  
 ' A continuous column sequencing and definitions of order of rearrangement in the 'formatReferenceSheetName' 
 '  is expected for this sub routine to work properly.
+' Refer to "FR_1" sheet within the excel file "Excel_Reference_Sheet.xlsx" in the GitHub repository "excel-macro-vba-library".
 Sub Custom_RearrangeColumns(formatReferenceSheet As Worksheet)
 
     Dim rowHolder As Long
@@ -165,6 +166,7 @@ End Sub
 
 Sub Custom_CreatePivotTable(formatReferenceSheet As Worksheet)
 ' Sub routine to create and design a Pivot Table as per definition in the Reference sheet formatReferenceSheet.
+' Refer to "PR_1" and "PR_2" sheet within the excel file "Excel_Reference_Sheet.xlsx" in the GitHub repository "excel-macro-vba-library".
 
     Dim sourceDataSheetName As String
     Dim sourceDataSheet As Worksheet
