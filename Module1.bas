@@ -5,7 +5,7 @@ Attribute VB_Name = "ModuleX"
 'pulled from https://github.com/GreenDiary/excel-macro-vba-library/
 'contributors:
 'DonJohan - Johan@dgk.se, johan.skoglund@accenture.com
-'GreenDiary
+'RisalNasar - mail.risal@gmail.com
 
 Function WorksheetExists(sName As Variant) As Boolean
     If Not sName = "" Then
