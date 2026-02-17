@@ -1,0 +1,30 @@
+# Excel
+*.tmp
+~$*.xls*
+*.xlk
+*.exe
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE / Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-*
+
+# VBA / Office (optional; uncomment if you don’t want to track these)
+# *.frx
+# *.log

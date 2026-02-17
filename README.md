@@ -1,161 +1,72 @@
 # Excel Macro VBA Library
 
-This repository is created to build a library of reusable VBA / Macro modules and functions for Microsoft Excel.
+> **Note:** This repository is not actively maintained. The code is provided as-is for use and forking; issues and PRs may not get a timely response.
 
-Right click to import the bas file as a new code module in excel vba.  
+A library of reusable VBA modules and functions for Microsoft Excel. Use it to speed up automation, user-defined functions (UDFs), and common worksheet operations.
 
-Included generic funtions and subroutines:
+## Table of contents
 
-```
-1) WorksheetExists
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Quick start](#quick-start)
+- [What's included](#whats-included)
+- [API reference](#api-reference)
+- [Contributing](#contributing)
 
-2) CopyRowAboveAndInsert
+## Requirements
 
-3) ProperX
+- **Microsoft Excel** with macros enabled (`.xlsm` or macro-enabled workbook).
+- **Active Directory**: Functions `get_user_info`, `get_user_id_from_distinguishedname`, and `get_user_id_from_email` require a domain-joined machine and AD access.
 
-'This is exactly like the PROPER function but works also in VBA
-'It makes the first letter in the input string capital
+## Installation
 
-4) Email_part
+1. Open your workbook in Excel and press **Alt+F11** to open the VBA editor.
+2. In the **Project** pane, right-click your project (or the **Modules** folder).
+3. Choose **Import File…** and select the `.bas` or `.vb` file you want (e.g. `Module1.bas`).
+4. Save the workbook as a **Macro-Enabled Workbook** (`.xlsm`).
 
-'Returns the selected part of an email adress
+To **export** a module (e.g. to contribute): right-click the module in the VBA editor → **Export File**.
 
-5) current_user
+## Quick start
 
-'gets the user id of the currently logged on active user
+- **As UDF in a cell:** e.g. `=ProperX(A1)`, `=Email_part(B2,"Domain")`, `=ReturnNthPartOfString(A2,4,"/")`.
+- **As VBA:** call any `Public` function or sub from your own macros, e.g. `Custom_GetLastRow(ActiveSheet)`.
 
-6) current_user_domain
+Run `RegisterDescriptionForUserDefinedFunction` once per session (or from an Auto_Open macro) to register help text and category for UDFs so they appear in the Insert Function dialog.
 
-'gets the user domain of the currently logged on active user
+## What's included
 
-7) get_user_info
+| Category | Description |
+|----------|-------------|
+| **Worksheets** | Check if a sheet exists, copy/rename sheets, get last row, set row/column dimensions. |
+| **Strings & text** | `ProperX` (PROPER in VBA), `Email_part`, `ReturnNthPartOfString`. |
+| **User & AD** | Current user/domain, and Active Directory lookups (manager, mail, department, etc.). |
+| **Columns & rows** | Copy/paste/insert/rename/delete columns, filters, sort, remove duplicates, freeze panes. |
+| **Cells & formatting** | Comments, number format, color range, convert numbers stored as text. |
+| **Pivot tables** | Create pivot from a reference sheet, add page/row/column/data fields. |
+| **Utilities** | Copy row above and insert (button-friendly), UTF-8 file read/write. |
 
-'this function queries active directory for information about a user and returns one value at a time
+Full list of procedures: [**docs/API.md**](docs/API.md).
 
-8) get_user_id_from_distinguishedname
+## API reference
 
-'this function queries active directory for the user id of a user with a certain distinguished name
+Detailed signatures, parameters, and usage for every function and sub are in:
 
-9) get_user_id_from_email
+- **[docs/API.md](docs/API.md)** — Complete API reference
 
-'This functions is for when the LDAP query returns the Dist name but we want the ID
+## File overview
 
-10) ReturnNthPartOfString
+| File | Purpose |
+|------|---------|
+| `Module1.bas` | Main library: worksheets, strings, AD, columns, pivots, formatting, etc. |
+| `Lib_ReadWriteUtf8.vb` | UTF-8 text file read/write for VBA. |
+| `custom_modules.vbs` / `custom_functions.vbs` | Reference/snippets (overlap with `Module1.bas`). |
 
-'Splits a delimited string and returns the Nth part
+## Contributing
 
-11) RegisterDescriptionForUserDefinedFunction()
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for how to add or change modules and keep the library consistent.
 
-' This function is only needed to run once to register help text and category for a user defined function
+## Credits
 
-12) Custom_GetLastRow
-
-13) Custom_SetRowHeightSheet
-
-'Adjust row height for the entire sheet.
-
-14) Custom_CopyRenameSheet
-
-' Sub routine to copy a source sheet to a new sheet and to rename the new sheet.
-
-15) Custom_NewRenameSheet
-
-' Sub routine to create a new sheet and to rename the new sheet.
-
-16) Custom_CopyPasteColumn
-
-' Sub routine to copy a column at position 'columnReferenceNumber' and insert it at position 'pastePositionReference'.
-
-17) Custom_InsertRenameColumn
-
-' Sub routine to insert a new column at column position 'targetColumnReference' of the sheet 'targetSheet', set width as 'targetColumnWidth' and set name as 'targetColumnName'.
-
-18) Custom_AddComment
-
-' Add a comment to a cell.
-
-19) Custom_RearrangeColumns
-
-' Sub Routine to re-arrange columns from one sheet to another.  
-' A continuous column sequencing and definitions of order of rearrangement in the 'formatReferenceSheetName' is expected for this sub routine to work properly.
-' Refer to "FR_1" sheet within the excel file "Excel_Reference_Sheet.xlsx" in the GitHub repository "excel-macro-vba-library".
-
-20) Custom_EnterFormulaAndFillDown
-
-' This sub routine enters a formula text 'formulaText' in a column's first cell (defined by 'targetSheet', 'columnReference' and 'rowOffset').  
-'The formula will be populated down to 'lastRow'.  Furthermore, the function will replace the cells involved with their values and remove the formula definitions after the fill down has been completed.
-
-21) Custom_ConvertNumberSavedAsText
-
-' Sub routine to convert number stored as text to number.
-
-22) Custom_DeleteColumn
-
-' Delete the 'targetColumn' in 'targetSheet'.
-
-23) Custom_CreatePivotTable
-
-' Sub routine to create and design a Pivot Table as per definition in the Reference sheet formatReferenceSheet.
-' Refer to "PR_1" and "PR_2" sheet within the excel file "Excel_Reference_Sheet.xlsx" in the GitHub repository "excel-macro-vba-library".
-
-24) Custom_PivotTableAddField
-
-' Create a Page Field (Report Filter) in the pivot table 'pivotTableName' in sheet 'pivotTableTargetSheet'.
-
-25) Custom_PivotTableAddDataField
-
-' Create a DataField in the pivot table 'pivotTableName' in sheet 'pivotTableTargetSheet', with name as 'dataFieldName' and with format 'dataFieldFormat'.
-
-26) Custom_SetColumnNumberFormat
-
-' Set the number format of a particular Column.
-
-27) Custom_SortSheetByColumn
-
-' Sort the entire sheet 'targetSheet' by the 'key1ColumnReference' in the order indicated by 'order1Reference'
-
-28) Custom_RemoveDuplicates
-
-' Remove all rows where the Column referred by 'indexColumnReference' has duplicate values.
-
-29) Custom_FreezeView
-
-' Freeze the view of the targetSheet.  The Split will be made at columnSplitLength and rowSplitLength.
-
-30) Custom_DeleteSheet
-
-' Delete targetSheet.
-
-31) Custom_ColorRange
-
-' Enter color into the range.
-    
-32) Custom_HideSheet(targetSheet As Worksheet)
-
-' Hide Sheet.
-
-33) Custom_ColumnFilter
-
-' Enable filter on a column of the targetSheet.  Filter for string value criteriaString.
-
-34) Custom_ReleaseFilter
-
-' Remove all filters from the targetSheet.
-
-35) Custom_DeleteVisibleRows
-
-' Delete all Visible Rows in the targetSheet.  This should be used after filtering the current sheet for the information you would want to have deleted.    
-
-36) Custom_SetColumnWidthSheet
-
-'  Adjust column width for the entire sheet.
-
-37) Custom_InsertRenameColumn
-```
-
-
-
-
-
-
-
+- Original repo: [GreenDiary/excel-macro-vba-library](https://github.com/GreenDiary/excel-macro-vba-library)
+- Contributors: DonJohan (Johan@dgk.se, johan.skoglund@accenture.com), RisalNasar

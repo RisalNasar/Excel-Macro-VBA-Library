@@ -11,7 +11,7 @@ Function ReadFromUTFFile(filepath As String) As String
     rawfile = objStream.ReadText
     objStream.Close
     Set objStream = Nothing
-    ReadFromFile = rawfile
+    ReadFromUTFFile = rawfile
 End Function
 Function WriteToUTFFile(filepath As String, content As String)
 'Write text to file encoded with UTF-8
