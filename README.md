@@ -68,5 +68,4 @@ See **[CONTRIBUTING.md](CONTRIBUTING.md)** for how to add or change modules and 
 
 ## Credits
 
-- Original repo: [GreenDiary/excel-macro-vba-library](https://github.com/GreenDiary/excel-macro-vba-library)
 - Contributors: RisalNasar, DonJohan
